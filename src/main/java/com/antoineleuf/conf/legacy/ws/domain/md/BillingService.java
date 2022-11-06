@@ -44,12 +44,15 @@ public class BillingService {
     return l_valeur;
   }
 
-  private Double calculatePayRatioFromDay(String s_time, String e_time, LocalDateTime sDT, LocalDateTime eDT) {
-    Duration duration;
-    if (sDT.isAfter(eDT)) {
-      duration = Duration.between(sDT, eDT.plusHours(24));
-    } else {
-      duration = Duration.between(LocalTime.parse(s_time), LocalTime.parse(e_time));
+  private Double calculatePayRatioFromDay(String startTime,
+                                          String endTime,
+                                          LocalDateTime startDateTime,
+                                          LocalDateTime endDateTime)
+  {
+    Duration duration = Duration.between(startDateTime, endDateTime);
+
+    if (startDateTime.isAfter(endDateTime)) {
+      duration = Duration.between(startDateTime, endDateTime.plusHours(24));
     }
 
     return 600 * (duration.toHours() / 8.0);
