@@ -135,4 +135,14 @@ public class BillingServiceTest {
     insert.executeUpdate();
   }
 
+  @Test
+  public void given_when_then() {
+    // given
+
+    // when
+
+    // then
+
+  }
+
 }
