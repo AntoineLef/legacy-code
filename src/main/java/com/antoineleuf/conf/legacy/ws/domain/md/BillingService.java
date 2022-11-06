@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -45,14 +44,9 @@ public class BillingService {
   }
 
   public Double calculatePayRatioFrom(LocalDateTime startDateTime, LocalDateTime endDateTime) {
-    PayCalculator payCalculator = new PayCalculatorImpl();
-    Duration duration = Duration.between(startDateTime, endDateTime);
-
-    if (startDateTime.isAfter(endDateTime)) {
-      duration = Duration.between(startDateTime, endDateTime.plusHours(24));
-    }
-
-    return 600 * (duration.toHours() / 8.0);
+    PayCalculatorSelector selector = new PayCalculatorSelector();
+    PayCalculator payCalculator = selector.selectfrom(startDateTime);
+    return payCalculator.calculatePayRatioFrom(startDateTime, endDateTime);
   }
 
 }
