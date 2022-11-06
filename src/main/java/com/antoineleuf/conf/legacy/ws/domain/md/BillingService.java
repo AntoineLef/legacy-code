@@ -45,6 +45,7 @@ public class BillingService {
   }
 
   public Double calculatePayRatioFrom(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+    PayCalculator payCalculator = new PayCalculatorImpl();
     Duration duration = Duration.between(startDateTime, endDateTime);
 
     if (startDateTime.isAfter(endDateTime)) {
