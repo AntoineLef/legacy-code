@@ -79,6 +79,25 @@ public class BillingServiceTest {
     assertEquals(0.0, dailyTotalOf);
   }
 
+  @Test
+  public void givenAFullDayWorkedBetweenTwoDay_whenCalculatingPayForToday_thenPayIsZero() throws SQLException {
+    // given
+    createFullDaySharedBetweenTwoDay();
+
+    // when
+    double dailyTotalOf = service.dailyTotalOf(A_DOCTOR_ID, TODAY);
+
+    // then
+    assertEquals(800.0, dailyTotalOf);
+  }
+
+  private void createFullDaySharedBetweenTwoDay() throws SQLException {
+    insert.setString(1, "20:00:00");
+    insert.setString(2, "04:00:00");
+    insert.setString(3, TODAY.minusDays(1).toString());
+    insert.executeUpdate();
+  }
+
   private void createAFullDayOfWorkYesterday() throws SQLException {
     insert.setString(1, "10:00:00");
     insert.setString(2, "18:00:00");
