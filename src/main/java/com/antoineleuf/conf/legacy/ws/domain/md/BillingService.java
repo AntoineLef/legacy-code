@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class BillingService {
@@ -28,8 +29,16 @@ public class BillingService {
 
       if (r.getString("d_id").equals(id)) {
         if (r.getDate("p_date").toLocalDate().isEqual(date)) {
-          Duration duree = Duration.between(LocalTime.parse(r.getString("s_time")),
-                                            LocalTime.parse(r.getString("e_time")));
+          LocalDateTime sDT = LocalDateTime.parse(r.getDate("p_date") + "T" + LocalTime.parse(r.getString("s_time")));
+          LocalDateTime eDT = LocalDateTime.parse(r.getDate("p_date") + "T" + LocalTime.parse(r.getString("e_time")));
+
+          Duration duree;
+          if (sDT.isAfter(eDT)) {
+            duree = Duration.between(sDT, eDT.plusHours(24));
+          } else {
+            duree = Duration.between(LocalTime.parse(r.getString("s_time")), LocalTime.parse(r.getString("e_time")));
+          }
+
           l_valeur += 600 * (duree.toHours() / 8.0);
         }
       }
