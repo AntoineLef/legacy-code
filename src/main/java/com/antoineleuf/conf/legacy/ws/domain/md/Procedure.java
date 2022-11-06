@@ -4,32 +4,32 @@ import java.time.LocalDateTime;
 
 public class Procedure {
 
-  private String hospitalName;
-  private LocalDateTime startTime;
-  private LocalDateTime endTime;
-  private String doctorId;
+  private String hName;
+  private LocalDateTime sTime;
+  private LocalDateTime eTime;
+  private String dId;
 
-  public Procedure(String doctorId, String hospitalName, LocalDateTime startTime, LocalDateTime endTime) {
-    this.doctorId = doctorId;
-    this.hospitalName = hospitalName;
-    this.startTime = startTime;
-    this.endTime = endTime;
+  public Procedure(String dId, String hName, LocalDateTime sTime, LocalDateTime eTime) {
+    this.dId = dId;
+    this.hName = hName;
+    this.sTime = sTime;
+    this.eTime = eTime;
   }
 
   public String getHospitalName() {
-    return hospitalName;
+    return hName;
   }
 
   public LocalDateTime getEndTime() {
-    return endTime;
+    return eTime;
   }
 
   public LocalDateTime getStartTime() {
-    return startTime;
+    return sTime;
   }
 
   public String getDoctorId() {
-    return doctorId;
+    return dId;
   }
 
 }

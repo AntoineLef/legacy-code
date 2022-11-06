@@ -1,49 +1,43 @@
 package com.antoineleuf.conf.legacy.ws.domain.md;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.util.List;
+import java.time.LocalTime;
 
 public class BillingService {
 
-  private static final double DAILY_WORKED_HOURS = 8.0;
+  private static final double JOUR = 8.0;
 
-  private DoctorRepository doctorRepository;
-  private ProcedureRepository procedureRepository;
+  public double dailyTotalOf(String id, LocalDate date) throws SQLException {
+    Connection c = null;
+    PreparedStatement st = null;
 
-  public BillingService(DoctorRepository doctorRepository, ProcedureRepository procedureRepository) {
-    this.doctorRepository = doctorRepository;
-    this.procedureRepository = procedureRepository;
-  }
+    c = DriverManager.getConnection("jdbc:postgresql://localhost:49153/doctordb", "postgres", "postgrespw");
 
-  public void addNewProcedure(String doctorId, ProcedureInfo procedureInfo) {
-    procedureRepository.add(new Procedure(doctorId,
-                                          procedureInfo.hospitalName,
-                                          procedureInfo.startTime,
-                                          procedureInfo.endTime));
-  }
+    c.setAutoCommit(false);
 
-  public void addDoctor(Doctor docter) {
-    doctorRepository.save(docter);
-  }
+    st = c.prepareStatement("Select * from PROCEDURES");
+    ResultSet r = st.executeQuery();
 
-  public double dailyTotalOf(String doctorId, LocalDate wantedDate) {
-    Double total = 0.0;
+    Double l_valeur = 0.0;
 
-    List<Procedure> procedures = procedureRepository.findAll();
+    while (r.next()) {
 
-    for (Procedure procedure : procedures) {
-      if (procedure.getDoctorId().equals(doctorId)) {
-        if (procedure.getStartTime().toLocalDate().isEqual(wantedDate)) {
-          Duration procedureDuration = Duration.between(procedure.getStartTime(), procedure.getEndTime());
-
-          double procedureRatio = procedureDuration.toHours() / DAILY_WORKED_HOURS;
-          total += 600 * procedureRatio;
+      if (r.getString("d_id").equals(id)) {
+        if (r.getDate("p_date").toLocalDate().isEqual(date)) {
+          Duration duree = Duration.between(LocalTime.parse(r.getString("s_time")),
+                                            LocalTime.parse(r.getString("s_time")));
+          l_valeur += 600 * (duree.toHours() / 8.0);
         }
       }
     }
 
-    return total;
+    return l_valeur;
   }
 
 }

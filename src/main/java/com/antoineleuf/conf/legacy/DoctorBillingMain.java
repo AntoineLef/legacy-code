@@ -15,10 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.antoineleuf.conf.legacy.ws.domain.md.BillingService;
-import com.antoineleuf.conf.legacy.ws.domain.md.DoctorRepository;
-import com.antoineleuf.conf.legacy.ws.domain.md.ProcedureRepository;
-import com.antoineleuf.conf.legacy.ws.infrastructure.md.InMemoryDoctorRepository;
-import com.antoineleuf.conf.legacy.ws.infrastructure.md.InMemoryProcedureRepository;
 import com.antoineleuf.conf.legacy.ws.resources.BillingResource;
 
 import jakarta.ws.rs.core.Application;
@@ -76,10 +72,7 @@ public class DoctorBillingMain {
 
   private static BillingService createBillingService() {
     // Setup resources' dependencies (DOMAIN + INFRASTRUCTURE)
-    DoctorRepository doctorRepository = new InMemoryDoctorRepository();
-    ProcedureRepository procedureRepository = new InMemoryProcedureRepository();
-
-    BillingService contactService = new BillingService(doctorRepository, procedureRepository);
+    BillingService contactService = new BillingService();
 
     return contactService;
   }

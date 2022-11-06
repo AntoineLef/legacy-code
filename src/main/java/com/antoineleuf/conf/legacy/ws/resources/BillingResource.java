@@ -1,5 +1,6 @@
 package com.antoineleuf.conf.legacy.ws.resources;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 import com.antoineleuf.conf.legacy.ws.domain.md.BillingService;
@@ -20,7 +21,12 @@ public class BillingResource {
 
   @GET
   public Response getAllBillingOfToday(@PathParam("doctorId") String medId) {
-    return Response.ok(billingService.dailyTotalOf(medId, LocalDate.now())).build();
+    try {
+      return Response.ok(billingService.dailyTotalOf(medId, LocalDate.now())).build();
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return Response.serverError().build();
+    }
   }
 
 }
