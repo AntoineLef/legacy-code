@@ -44,10 +44,10 @@ public class BillingService {
     return l_valeur;
   }
 
-  private Double calculatePayRatioFromDay(String startTime,
-                                          String endTime,
-                                          LocalDateTime startDateTime,
-                                          LocalDateTime endDateTime)
+  public Double calculatePayRatioFromDay(String startTime,
+                                         String endTime,
+                                         LocalDateTime startDateTime,
+                                         LocalDateTime endDateTime)
   {
     Duration duration = Duration.between(startDateTime, endDateTime);
 
