@@ -36,7 +36,7 @@ public class BillingService {
           LocalDateTime sDT = LocalDateTime.parse(r.getDate("p_date") + "T" + LocalTime.parse(s_time));
           LocalDateTime eDT = LocalDateTime.parse(r.getDate("p_date") + "T" + LocalTime.parse(e_time));
 
-          l_valeur = calculatePayRatioFromDay(l_valeur, s_time, e_time, sDT, eDT);
+          l_valeur += calculatePayRatioFromDay(s_time, e_time, sDT, eDT);
         }
       }
     }
@@ -44,12 +44,7 @@ public class BillingService {
     return l_valeur;
   }
 
-  private Double calculatePayRatioFromDay(Double l_valeur,
-                                          String s_time,
-                                          String e_time,
-                                          LocalDateTime sDT,
-                                          LocalDateTime eDT)
-  {
+  private Double calculatePayRatioFromDay(String s_time, String e_time, LocalDateTime sDT, LocalDateTime eDT) {
     Duration duration;
     if (sDT.isAfter(eDT)) {
       duration = Duration.between(sDT, eDT.plusHours(24));
@@ -57,8 +52,7 @@ public class BillingService {
       duration = Duration.between(LocalTime.parse(s_time), LocalTime.parse(e_time));
     }
 
-    l_valeur += 600 * (duration.toHours() / 8.0);
-    return l_valeur;
+    return 600 * (duration.toHours() / 8.0);
   }
 
 }
