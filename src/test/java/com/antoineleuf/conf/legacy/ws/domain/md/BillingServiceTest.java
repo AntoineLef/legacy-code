@@ -51,7 +51,7 @@ public class BillingServiceTest {
     double dailyTotal = service.dailyTotalOf("A_DOCTOR_ID", LocalDate.now());
 
     // then
-    assertEquals(800.0, dailyTotal);
+    assertEquals(600.0, dailyTotal);
   }
 
   private void createAFullDayOfWork() throws SQLException {
