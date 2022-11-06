@@ -94,12 +94,12 @@ public class BillingServiceTest {
   }
 
   @Test
-  public void givenAFullDayWorkedBetweenTwoDay_whenCalculatingPayForToday_thenPayIsFull() throws SQLException {
+  public void givenAFullDayWorkedBetweenTwoDay_whenCalculatingPayForYesterday_thenPayIsFull() throws SQLException {
     // given
     createFullDaySharedBetweenTwoDay();
 
     // when
-    double dailyTotalOf = service.dailyTotalOf(A_DOCTOR_ID, TODAY);
+    double dailyTotalOf = service.dailyTotalOf(A_DOCTOR_ID, TODAY.minusDays(1));
 
     // then
     assertEquals(600.0, dailyTotalOf);
