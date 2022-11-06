@@ -140,6 +140,7 @@ public class BillingServiceTest {
 
   @Test
   public void given8HoursWorked_whenCalculatingPayForWorkedHours_thenPayIsFull() {
+<<<<<<< HEAD
     // given
     LocalDateTime startDateTime = LocalDateTime.parse("2022-11-05T10:00:00");
     LocalDateTime endDateTime = LocalDateTime.parse("2022-11-05T18:00:00");
@@ -156,11 +157,17 @@ public class BillingServiceTest {
     // given
     LocalDateTime startDateTime = LocalDateTime.parse("2022-11-05T10:00:00");
     LocalDateTime endDateTime = LocalDateTime.parse("2022-11-05T11:00:00");
+=======
+    // given
+    LocalDateTime startDateTime = LocalDateTime.parse("2022-11-05T10:00:00");
+    LocalDateTime endDateTime = LocalDateTime.parse("2022-11-05T18:00:00");
+>>>>>>> c628197 (Added first unit test on extracted method)
 
     // when
     Double amount = service.calculatePayRatioFrom(startDateTime, endDateTime);
 
     // then
+<<<<<<< HEAD
     Truth.assertThat(amount).isEqualTo(CHARGE_FOR_EIGHT_HOURS / 8);
   }
 
@@ -175,6 +182,9 @@ public class BillingServiceTest {
 
     // then
     Truth.assertThat(amount).isEqualTo(0.0);
+=======
+    Truth.assertThat(amount).isEqualTo(600.0);
+>>>>>>> c628197 (Added first unit test on extracted method)
   }
 
   @Test
