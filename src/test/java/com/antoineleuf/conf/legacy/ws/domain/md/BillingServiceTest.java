@@ -189,6 +189,7 @@ public class BillingServiceTest {
 
     // then
     Truth.assertThat(amount).isEqualTo(CHARGE_FOR_EIGHT_HOURS * 1.25);
+
   }
 
   @Test
