@@ -31,17 +31,19 @@ public class BillingService {
 
       if (r.getString("d_id").equals(id)) {
         if (r.getDate("p_date").toLocalDate().isEqual(date)) {
-          LocalDateTime sDT = LocalDateTime.parse(r.getDate("p_date") + "T" + LocalTime.parse(r.getString("s_time")));
-          LocalDateTime eDT = LocalDateTime.parse(r.getDate("p_date") + "T" + LocalTime.parse(r.getString("e_time")));
+          String s_time = r.getString("s_time");
+          String e_time = r.getString("e_time");
+          LocalDateTime sDT = LocalDateTime.parse(r.getDate("p_date") + "T" + LocalTime.parse(s_time));
+          LocalDateTime eDT = LocalDateTime.parse(r.getDate("p_date") + "T" + LocalTime.parse(e_time));
 
-          Duration duree;
+          Duration duration;
           if (sDT.isAfter(eDT)) {
-            duree = Duration.between(sDT, eDT.plusHours(24));
+            duration = Duration.between(sDT, eDT.plusHours(24));
           } else {
-            duree = Duration.between(LocalTime.parse(r.getString("s_time")), LocalTime.parse(r.getString("e_time")));
+            duration = Duration.between(LocalTime.parse(s_time), LocalTime.parse(e_time));
           }
 
-          l_valeur += 600 * (duree.toHours() / 8.0);
+          l_valeur += 600 * (duration.toHours() / 8.0);
         }
       }
     }
