@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.antoineleuf.conf.legacy.DoctorBillingMain;
+import com.google.common.truth.Truth;
 
 public class BillingServiceTest {
 
@@ -136,13 +138,16 @@ public class BillingServiceTest {
   }
 
   @Test
-  public void given_when_then() {
+  public void given8HoursWorked_whenCalculatingPayForWorkedHours_thenPayIsFull() {
     // given
+    LocalDateTime startDateTime = LocalDateTime.parse("2022-11-05T10:00:00");
+    LocalDateTime endDateTime = LocalDateTime.parse("2022-11-05T18:00:00");
 
     // when
+    Double amount = service.calculatePayRatioFrom(startDateTime, endDateTime);
 
     // then
-
+    Truth.assertThat(amount).isEqualTo(600.0);
   }
 
 }
