@@ -11,8 +11,6 @@ import java.time.LocalTime;
 
 public class BillingService {
 
-  private static final double JOUR = 8.0;
-
   public double dailyTotalOf(String id, LocalDate date) throws SQLException {
     Connection c = null;
     PreparedStatement st = null;
@@ -31,7 +29,7 @@ public class BillingService {
       if (r.getString("d_id").equals(id)) {
         if (r.getDate("p_date").toLocalDate().isEqual(date)) {
           Duration duree = Duration.between(LocalTime.parse(r.getString("s_time")),
-                                            LocalTime.parse(r.getString("s_time")));
+                                            LocalTime.parse(r.getString("e_time")));
           l_valeur += 600 * (duree.toHours() / 8.0);
         }
       }
