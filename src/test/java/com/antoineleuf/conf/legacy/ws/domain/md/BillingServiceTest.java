@@ -80,7 +80,9 @@ public class BillingServiceTest {
   }
 
   @Test
-  public void givenAFullDayWorkedBetweenTwoDay_whenCalculatingPayForToday_thenPayIsZero() throws SQLException {
+  public void givenAFullDayWorkedBetweenTwoDay_whenCalculatingPayForToday_thenPayIsZeroSinceItStartedThePreviousDay()
+    throws SQLException
+  {
     // given
     createFullDaySharedBetweenTwoDay();
 
@@ -88,7 +90,19 @@ public class BillingServiceTest {
     double dailyTotalOf = service.dailyTotalOf(A_DOCTOR_ID, TODAY);
 
     // then
-    assertEquals(800.0, dailyTotalOf);
+    assertEquals(0.0, dailyTotalOf);
+  }
+
+  @Test
+  public void givenAFullDayWorkedBetweenTwoDay_whenCalculatingPayForToday_thenPayIsFull() throws SQLException {
+    // given
+    createFullDaySharedBetweenTwoDay();
+
+    // when
+    double dailyTotalOf = service.dailyTotalOf(A_DOCTOR_ID, TODAY);
+
+    // then
+    assertEquals(600.0, dailyTotalOf);
   }
 
   private void createFullDaySharedBetweenTwoDay() throws SQLException {
