@@ -13,6 +13,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import com.antoineleuf.conf.legacy.DoctorBillingMain;
+
 public class BillingServiceTest {
 
   private static final LocalDate TODAY = LocalDate.now();
@@ -23,7 +25,7 @@ public class BillingServiceTest {
 
   @BeforeAll
   public static void before() throws SQLException {
-    c = DriverManager.getConnection("jdbc:postgresql://localhost:49153/doctordb", "postgres", "postgrespw");
+    c = DriverManager.getConnection(DoctorBillingMain.DB_URL, "demo-account", "AVNS_NUij4N-r65Ff24ge_Un");
 
     insert = c.prepareStatement("INSERT INTO procedures values ('TEST_PROCEDURE_ID', 'A_DOCTOR_ID',"
                                 + " 'AN_HOSPITAL', ?, ?, ?);");
