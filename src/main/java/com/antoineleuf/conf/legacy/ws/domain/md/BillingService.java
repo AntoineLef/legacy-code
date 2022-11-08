@@ -10,13 +10,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import com.antoineleuf.conf.legacy.DoctorBillingMain;
+
 public class BillingService {
 
   public double dailyTotalOf(String id, LocalDate date) throws SQLException {
     Connection c = null;
     PreparedStatement st = null;
 
-    c = DriverManager.getConnection("jdbc:postgresql://localhost:49153/doctordb", "postgres", "postgrespw");
+    c = DriverManager.getConnection(DoctorBillingMain.DB_URL, "demo-account", "AVNS_NUij4N-r65Ff24ge_Un");
 
     c.setAutoCommit(false);
 
