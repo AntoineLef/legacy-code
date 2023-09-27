@@ -26,7 +26,7 @@ import jakarta.ws.rs.core.Application;
 public class DoctorBillingMain {
 
   public static final String DB_URL =
-                                    "jdbc:postgresql://db-postgresql-legacy-prez-do-user-1743345-0.b.db.ondigitalocean.com:25060/doctordb?sslmode=require";
+                                    "jdbc:postgresql://db-conf-legacy-do-user-1743345-0.b.db.ondigitalocean.com:25060/doctordb?sslmode=require";
   private static final Logger LOGGER = LoggerFactory.getLogger(DoctorBillingMain.class);
 
   public static boolean isDev = true; // Would be a JVM argument or in a .property file
