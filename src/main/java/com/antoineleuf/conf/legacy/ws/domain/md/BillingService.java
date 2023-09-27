@@ -17,7 +17,7 @@ public class BillingService {
     Connection c = null;
     PreparedStatement st = null;
 
-    c = DriverManager.getConnection(DoctorBillingMain.DB_URL, "demo-account", "AVNS_NUij4N-r65Ff24ge_Un");
+    c = DriverManager.getConnection(DoctorBillingMain.DB_URL, "doadmin", "AVNS__9-S-xkLOyQRr3YWizx");
 
     c.setAutoCommit(false);
 
