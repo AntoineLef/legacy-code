@@ -25,7 +25,7 @@ public class BillingServiceTest {
 
   @BeforeAll
   public static void before() throws SQLException {
-    c = DriverManager.getConnection(DoctorBillingMain.DB_URL, "demo-account", "AVNS_NUij4N-r65Ff24ge_Un");
+    c = DriverManager.getConnection(DoctorBillingMain.DB_URL, "doadmin", "AVNS__9-S-xkLOyQRr3YWizx");
 
     insert = c.prepareStatement("INSERT INTO procedures values ('TEST_PROCEDURE_ID', 'A_DOCTOR_ID',"
                                 + " 'AN_HOSPITAL', ?, ?, ?);");
